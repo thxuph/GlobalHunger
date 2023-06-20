@@ -1,6 +1,6 @@
-SELECT * FROM global_hunger_index
+--Dataset: https://www.kaggle.com/datasets/whenamancodes/the-global-hunger-index
 
---Compare the number of countries in each category of hunger index scores in two years 2000 and 2021
+--Looking at the number of countries in each category of hunger index scores in two years 2000 and 2021
 
 SELECT
   SUM(CASE WHEN year = 2000 AND global_hunger_index >= 50 THEN 1 ELSE 0 END) AS extremely_alarming_2000,
@@ -15,7 +15,7 @@ SELECT
   SUM(CASE WHEN year = 2021 AND global_hunger_index < 10 THEN 1 ELSE 0 END) AS low_2021
 FROM global_hunger_index;
 
---Look at countries with hunger index scores categorized "Extremely alarming"(>=50) in 2000 and 2021.
+--Looking at countries with hunger index scores categorized "Extremely alarming"(>=50) in 2000 and 2021.
 
 SELECT entity, year, global_hunger_index FROM global_hunger_index
 WHERE year = 2000 AND global_hunger_index >= 50
@@ -26,7 +26,7 @@ SELECT entity, year, global_hunger_index FROM global_hunger_index
 WHERE year = 2021 AND global_hunger_index >= 50
 ORDER BY year, global_hunger_index DESC;
 
---Look at countries with hunger index scores categorized "Alarming"(>=35 & <50) in 2000 and 2021.
+--Looking at countries with hunger index scores categorized "Alarming"(>=35 & <50) in 2000 and 2021.
 
 SELECT entity, year, global_hunger_index FROM global_hunger_index
 WHERE year = 2000 AND global_hunger_index >= 35 AND global_hunger_index < 50
@@ -37,21 +37,21 @@ SELECT entity, year, global_hunger_index FROM global_hunger_index
 WHERE year = 2021 AND global_hunger_index >= 35 AND global_hunger_index < 50
 ORDER BY year, global_hunger_index DESC;
 
---Look at top 10 countries with highest hunder index score in 2000
+--Looking at top 10 countries with highest hunger index score in 2000
 
 SELECT entity, global_hunger_index FROM global_hunger_index 
 WHERE year = 2000
 ORDER BY global_hunger_index DESC
 LIMIT 10
 
---Look at top 10 countries with highest hunger index score in 2021
+--Looking at top 10 countries with highest hunger index score in 2021
 
 SELECT entity, global_hunger_index FROM global_hunger_index 
 WHERE year = 2021
 ORDER BY global_hunger_index DESC
 LIMIT 10
 
---Look at improvements of lowering hunger index score 
+--Looking at improvements of lowering hunger index score 
 
 WITH countries_2000 AS (
   SELECT entity, global_hunger_index FROM global_hunger_index 
